@@ -10,6 +10,14 @@ class Character:
         other.hp -= damage
         print(f"{self.name} attacked {other.name} for {damage} damage!")
 
+    def heal(self):
+        #random healing amount
+        heal_amount = random.randint(5, 10)
+        #add to the current hp
+        self.hp += heal_amount
+
+        print(f"{self.name} healed for {heal_amount} HP!")
+
 #initalize the two characters
 player = Character ("Hero", 100)
 enemy = Character ("Goblin", 100)
@@ -24,3 +32,24 @@ while player.hp > 0 and enemy.hp > 0:
 
     #Ask the user for their decision
     choice = input("Your move (1/2): ")
+
+    #2 use input
+    if choice == "1":
+        player.attack(enemy)
+    elif choice == "2":
+        player.heal()
+    else: 
+        print("You panicked and missed your turn")
+
+    #hp checker
+    if enemy.hp<= 0:
+        print("Victory! The goblin is defeated")
+        break
+
+    #enemy attacks a player
+    enemy.attack(player)
+
+    #check if player died
+    if player.hp <= 0:
+        print("Defeat, you ran out of HP and died")
+        break
