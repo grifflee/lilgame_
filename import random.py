@@ -14,7 +14,16 @@ class Character:
         self.potions = 3 #potions default to 3
 
     def attack(self, other):
+        #base damage calculation
         damage = random.randint(5, 10)
+        base = damage
+
+        #if a 1 is randomly rolled, then the damage for this turn is doubled
+        if random.randint(1, 10) == 1:
+            damage = damage * 2
+            print(f"***CRITICAL HIT!***")
+            print(f"{base} damage turns into {damage}")
+
         other.hp -= damage
         print(f"{self.name} attacked {other.name} for {damage} damage!")
 
@@ -61,7 +70,7 @@ while player.hp > 0 and enemy.hp > 0:
         player.attack(enemy)
     elif choice == "2":
         #only let enemy attack if the heal was successful 
-        if player.heal():
+        if player.heal() == True:
             pass #the turn happened 
         else: 
             continue
