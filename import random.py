@@ -4,6 +4,7 @@ class Character:
     def __init__(self, name, hp):
         self.name = name
         self.hp = hp
+        self.max_hp = hp #save the originally set HP as the max_hp
 
     def attack(self, other):
         damage = random.randint(5, 10)
@@ -16,7 +17,10 @@ class Character:
         #add to the current hp
         self.hp += heal_amount
 
-        print(f"{self.name} healed for {heal_amount} HP!")
+        if self.hp > self.max_hp:
+            self.hp = self.max_hp
+
+        print(f"{self.name} healed for {heal_amount} HP! (Current HP: {self.hp}/{self.max_hp})")
 
 #initalize the two characters
 player = Character ("Hero", 100)
